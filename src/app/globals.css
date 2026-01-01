@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #1a1a1a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Minimalist drink pattern background */
+.drink-pattern-bg {
+  background-color: #f8f9fa;
+  position: relative;
+}
+
+.drink-pattern-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.4;
+  background-image: 
+    url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23e0e0e0' stroke-width='1.5'%3E%3Cpath d='M35 20 L35 35 L30 40 L40 40 L35 35 Z' /%3E%3Ccircle cx='65' cy='60' r='8' /%3E%3Cpath d='M62 60 L68 60 M65 57 L65 63' /%3E%3Crect x='15' y='65' width='12' height='18' rx='1' /%3E%3Cpath d='M70 22 L75 28 L80 28 L85 22 L82 15 L73 15 Z' /%3E%3C/g%3E%3C/svg%3E");
+  background-size: 100px 100px;
+  background-repeat: repeat;
+  z-index: 0;
+}
+
+.drink-pattern-bg > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Dark mode pattern */
+@media (prefers-color-scheme: dark) {
+  .drink-pattern-bg {
+    background-color: #1a1a1a;
+  }
+  
+  .drink-pattern-bg::before {
+    opacity: 0.15;
+    background-image: 
+      url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='1.5'%3E%3Cpath d='M35 20 L35 35 L30 40 L40 40 L35 35 Z' /%3E%3Ccircle cx='65' cy='60' r='8' /%3E%3Cpath d='M62 60 L68 60 M65 57 L65 63' /%3E%3Crect x='15' y='65' width='12' height='18' rx='1' /%3E%3Cpath d='M70 22 L75 28 L80 28 L85 22 L82 15 L73 15 Z' /%3E%3C/g%3E%3C/svg%3E");
+  }
+}
