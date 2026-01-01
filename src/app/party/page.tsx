@@ -5,6 +5,8 @@ import { useSession } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import toast from 'react-hot-toast';
 
+export const dynamic = 'force-dynamic';
+
 interface PartyPlayer {
   userId: string;
   name: string;

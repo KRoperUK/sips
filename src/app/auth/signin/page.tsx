@@ -5,6 +5,8 @@ import { useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 
+export const dynamic = 'force-dynamic';
+
 export default function SignIn() {
   const searchParams = useSearchParams();
   const error = searchParams.get('error');
