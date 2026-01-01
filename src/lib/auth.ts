@@ -8,6 +8,13 @@ export const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      authorization: {
+        params: {
+          prompt: "consent",
+          access_type: "offline",
+          response_type: "code"
+        }
+      }
     }),
     AppleProvider({
       clientId: process.env.APPLE_CLIENT_ID!,
@@ -53,4 +60,25 @@ export const authOptions: NextAuthOptions = {
     signIn: '/auth/signin',
   },
   secret: process.env.NEXTAUTH_SECRET,
+  // Explicitly set the URL - this ensures proper callback URLs
+  ...(process.env.NEXTAUTH_URL && { 
+    url: process.env.NEXTAUTH_URL 
+  }),
+  // Cookie configuration for production with reverse proxy
+  cookies: {
+    sessionToken: {
+      name: process.env.NODE_ENV === 'production' 
+        ? '__Secure-next-auth.session-token'
+        : 'next-auth.session-token',
+      options: {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+        // Secure only in production (HTTPS)
+        secure: process.env.NODE_ENV === 'production',
+      },
+    },
+  },
+  // Explicitly set secure cookies based on URL protocol
+  useSecureCookies: process.env.NEXTAUTH_URL?.startsWith("https://"),
 };
